@@ -1,0 +1,67 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
+| todo               |
++--------------------+
+3 rows in set
+
+mysql> show grants;
++-------------------------------------------------------------+
+| Grants for todo@localhost                                   |
++-------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `todo`@`localhost`                    |
+| GRANT ALL PRIVILEGES ON `todo`.* TO `todo`@`localhost`      |
+| GRANT ALL PRIVILEGES ON `todo`.`todo` TO `todo`@`localhost` |
++-------------------------------------------------------------+
+3 rows in set
+
+mysql> use todo;
+Database changed
+mysql> create table user(id uint primary key auto_increment,name varchar(20));
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'uint primary key auto_increment,name varchar(20))' at line 1
+mysql> create table user(id unsigned int primary key auto_increment,name varchar(20));
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'unsigned int primary key auto_increment,name varchar(20))' at line 1
+mysql> create table user(id int unsigned primary key auto_increment,name varchar(20));
+Query OK, 0 rows affected
+mysql> show tables;
++----------------+
+| Tables_in_todo |
++----------------+
+| user           |
++----------------+
+1 row in set
+
+mysql> insert into user(null,'qwq');
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'null,'qwq')' at line 1
+mysql> insert into user(null,qwq);
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'null,qwq)' at line 1
+mysql> insert into user values(null,'qwq');
+Query OK, 1 row affected
+mysql> desc user;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20)  | YES  |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+2 rows in set
+
+mysql> show table;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select * from user;
++----+------+
+| id | name |
++----+------+
+|  1 | qwq  |
++----+------+
+1 row in set
+
+mysql> delete from user where id=1;
+Query OK, 1 row affected
+mysql> select * from user;
+Empty set
+
+mysql> 

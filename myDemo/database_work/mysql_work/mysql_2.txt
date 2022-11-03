@@ -1,0 +1,52 @@
+mysql> select user(0;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0' at line 1
+mysql> select user();
++----------------+
+| user()         |
++----------------+
+| root@localhost |
++----------------+
+1 row in set
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| my_data            |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| todo               |
+| user               |
+| world              |
++--------------------+
+9 rows in set
+
+mysql> drop database todo;
+Query OK, 0 rows affected
+
+mysql> create user 'todo'@'localhost' identified by 'todo123';
+Query OK, 0 rows affected
+mysql> create database todo;
+Query OK, 1 row affected
+
+mysql> grant all PRIVILEGES on 'todo' to 'todo'@'localhost';
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''todo' to 'todo'@'localhost'' at line 1
+mysql> use todo;
+Database changed
+mysql> grant all PRIVILEGES on 'todo' to 'todo'@'localhost';
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''todo' to 'todo'@'localhost'' at line 1
+mysql> grant all PRIVILEGES on todo to 'todo'@'localhost';
+Query OK, 0 rows affected
+
+mysql> grant all PRIVILEGES on todo.* to 'todo'@'localhost';
+Query OK, 0 rows affected
+
+mysql> grant all PRIVILEGES on 'todo'.* to 'todo'@'localhost';
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''todo'.* to 'todo'@'localhost'' at line 1
+mysql> flush PRIVILEGES;
+Query OK, 0 rows affected
+
+mysql> 
